@@ -73,6 +73,7 @@
 #include "i2cdev.h"
 #include "autoconf.h"
 #include "vcp_esc_passthrough.h"
+#include "wasm.h"
 #if CONFIG_ENABLE_CPX
   #include "cpxlink.h"
 #endif
@@ -212,6 +213,7 @@ void systemTask(void *arg)
   }
   soundInit();
   crtpMemInit();
+  wasmTaskInit();
 
 #ifdef PROXIMITY_ENABLED
   proximityInit();
@@ -287,6 +289,10 @@ void systemTask(void *arg)
   if (peerLocalizationTest() == false) {
     pass = false;
     DEBUG_PRINT("peerLocalization [FAIL]\n");
+  }
+  if (wasmTaskTest() == false) {
+    pass = false;
+    DEBUG_PRINT("wasmTask [FAIL]\n");
   }
 
   //Start the firmware
