@@ -1,5 +1,1 @@
 obj-y += wasm.o
-obj-y += wasm_loader.o
-obj-y += wasm_runtime_common.o
-obj-y += wasm_runtime.o
-obj-y += stubs.o

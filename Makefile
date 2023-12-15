@@ -40,6 +40,7 @@ PROCESSOR = -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16
 LINKER_DIR = $(srctree)/tools/make/F405/linker
 
 LDFLAGS += --specs=nosys.specs --specs=nano.specs $(PROCESSOR)
+LDFLAGS += -L$(PWD)/../
 image_LDFLAGS += -Wl,-Map=$(PROG).map,--cref,--gc-sections,--undefined=uxTopUsedPriority
 image_LDFLAGS += -L$(srctree)/tools/make/F405/linker
 image_LDFLAGS += -T $(LINKER_DIR)/FLASH_CLOAD.ld
@@ -64,10 +65,12 @@ INCLUDES += -I$(LIB)/STM32F4xx_StdPeriph_Driver/inc
 INCLUDES += -I$(LIB)/vl53l1 -I$(LIB)/vl53l1/core/inc
 INCLUDES += -I$(KBUILD_OUTPUT)/include/generated
 
-INCLUDES += -I/home/benedikt/projects/crazyflie/wasm_integration/wasm-micro-runtime/core/iwasm/include
-INCLUDES += -I/home/benedikt/projects/crazyflie/wasm_integration/wasm-micro-runtime/core/shared/platform/include
-INCLUDES += -I/home/benedikt/projects/crazyflie/wasm_integration/wasm-micro-runtime/core/shared/utils
-INCLUDES += -I/home/benedikt/projects/crazyflie/wasm_integration/wasm-micro-runtime/core/iwasm/common
+INCLUDES += -I$(WASM_MICRO_RUNTIME)/core/iwasm/include
+INCLUDES += -I$(WASM_MICRO_RUNTIME)/core/shared/platform/include
+INCLUDES += -I$(WASM_MICRO_RUNTIME)/core/shared/utils
+INCLUDES += -I$(WASM_MICRO_RUNTIME)/core/iwasm/common
+
+cf2-objs := $(PWD)/../libvmlib.a
 
 # Here we tell Kbuild where to look for Kbuild files which will tell the
 # buildsystem which sources to build
