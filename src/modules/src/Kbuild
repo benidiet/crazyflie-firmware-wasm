@@ -46,7 +46,6 @@ obj-y += sysload.o
 obj-y += system.o
 obj-$(CONFIG_DECK_LOCO) += tdoaEngineInstance.o
 obj-y += vcp_esc_passthrough.o
-obj-y += wasm.o
 obj-y += worker.o
 
 # Sub folders
@@ -57,3 +56,4 @@ obj-y += estimator/
 obj-y += cpx/
 obj-y += p2pDTR/
 obj-y += outlierfilter/
+obj-y += wasm/
